@@ -1,0 +1,39 @@
+{
+  "name": "setbased/abc-login-handler-core",
+  "description": "ABC-Framework: Core Login Handler",
+  "keywords": [
+    "ABC-Framework",
+    "Login",
+    "Handler",
+    "Core"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.0.0",
+    "setbased/abc": "^0.10.23",
+    "setbased/abc-login-handler": "^0.9.1",
+    "setbased/abc-login-requirement": "^0.9.0"
+  },
+  "require-dev": {
+    "phing/phing": "^2.0.0",
+    "phpunit/phpunit": "^6.0.0",
+    "setbased/php-stratum": "^0.9.50"
+  },
+  "autoload": {
+    "psr-4": {
+      "SetBased\\Abc\\Login\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SetBased\\Abc\\Login\\Test\\": "test/"
+    },
+    "classmap": [
+      "test/C.php"
+    ]
+  },
+  "config": {
+    "bin-dir": "bin/"
+  }
+}

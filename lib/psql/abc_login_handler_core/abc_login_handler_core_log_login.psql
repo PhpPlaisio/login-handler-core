@@ -1,0 +1,34 @@
+/**
+ * Logs a login attempt.
+ *
+ * @param p_cmp_id        The ID of the company.
+ * @param p_ses_id        The ID of the session.
+ * @param p_usr_id        The ID of the user.
+ * @param p_lgr_id        The ID of the login response.
+ * @param p_llg_user_name The user name under which the user agent want to login.
+ * @param p_ip_address    The IP address of the user agent.
+ */
+create procedure abc_login_handler_core_log_login(in p_cmp_id        @abc_log_login.cmp_id%type@,
+                                                  in p_ses_id        @abc_log_login.ses_id%type@,
+                                                  in p_usr_id        @abc_log_login.usr_id%type@,
+                                                  in p_lgr_id        @abc_log_login.lgr_id%type@,
+                                                  in p_llg_user_name @abc_log_login.llg_user_name%type@,
+                                                  in p_ip_address     varchar(15) )
+modifies sql data
+-- type: none
+begin
+  -- Log the login attempt in the login specific log table.
+  insert into ABC_LOG_LOGIN( cmp_id
+  ,                          lgr_id
+  ,                          ses_id
+  ,                          usr_id
+  ,                          llg_timestamp
+  ,                          llg_user_name )
+  values( p_cmp_id
+  ,       p_lgr_id
+  ,       p_ses_id
+  ,       p_usr_id
+  ,       now()
+  ,       p_llg_user_name )
+  ;
+end

@@ -1,0 +1,10 @@
+CREATE TABLE `ABC_BABEL_WORD` (
+  `wrd_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`wrd_id`)
+);
+
+insert into `ABC_BABEL_WORD`( `wrd_id`)
+values( 1 )
+;
+
+commit;
