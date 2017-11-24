@@ -20,6 +20,8 @@ class TestAbc extends Abc
     self::$companyResolver = new TestCompanyResolver();
     self::$DL              = new TestDataLayer();
     self::$session         = new TestSession();
+
+    TestSession::$usrId = null;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

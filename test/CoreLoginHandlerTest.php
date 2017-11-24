@@ -5,7 +5,6 @@ namespace SetBased\Abc\Login\Test;
 use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Login\Test\TestSession;
 
 /**
  * Test cases for class CoreLoginHandlerTest.
@@ -35,7 +34,7 @@ class CoreLoginHandlerTest extends TestCase
     $granted = $handler->validate($data);
 
     self::assertTrue($granted);
-    self::assertNull(TestSession::$usrId);
+    self::assertSame('3', TestSession::$usrId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -53,7 +52,7 @@ class CoreLoginHandlerTest extends TestCase
     $granted = $handler->validate($data);
 
     self::assertFalse($granted);
-    self::assertSame('3', TestSession::$usrId);
+    self::assertNull(TestSession::$usrId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
