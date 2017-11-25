@@ -8,27 +8,29 @@
  * @param p_llg_user_name The user name under which the user agent want to login.
  * @param p_ip_address    The IP address of the user agent.
  */
-create procedure abc_login_handler_core_log_login(in p_cmp_id        @abc_log_login.cmp_id%type@,
-                                                  in p_ses_id        @abc_log_login.ses_id%type@,
-                                                  in p_usr_id        @abc_log_login.usr_id%type@,
-                                                  in p_lgr_id        @abc_log_login.lgr_id%type@,
-                                                  in p_llg_user_name @abc_log_login.llg_user_name%type@,
-                                                  in p_ip_address     varchar(15) )
+create procedure abc_login_handler_core_log_login(in p_cmp_id        @abc_auth_login_log.cmp_id%type@,
+                                                  in p_ses_id        @abc_auth_login_log.ses_id%type@,
+                                                  in p_usr_id        @abc_auth_login_log.usr_id%type@,
+                                                  in p_lgr_id        @abc_auth_login_log.lgr_id%type@,
+                                                  in p_llg_user_name @abc_auth_login_log.llg_user_name%type@,
+                                                  in p_ip_address    varchar(15) )
 modifies sql data
 -- type: none
 begin
   -- Log the login attempt in the login specific log table.
-  insert into ABC_LOG_LOGIN( cmp_id
-  ,                          lgr_id
-  ,                          ses_id
-  ,                          usr_id
-  ,                          llg_timestamp
-  ,                          llg_user_name )
+  insert into ABC_AUTH_LOGIN_LOG( cmp_id
+  ,                               lgr_id
+  ,                               ses_id
+  ,                               usr_id
+  ,                               llg_timestamp
+  ,                               llg_user_name
+  ,                               llg_ip4 )
   values( p_cmp_id
   ,       p_lgr_id
   ,       p_ses_id
   ,       p_usr_id
   ,       now()
-  ,       p_llg_user_name )
+  ,       p_llg_user_name
+  ,       inet_aton(p_ip_address) )
   ;
 end
