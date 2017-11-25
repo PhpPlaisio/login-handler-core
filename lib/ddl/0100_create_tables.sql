@@ -5,7 +5,7 @@
 /*  FileName : abc-login-handler-core.ecm                                         */
 /*  Platform : MySQL 5                                                            */
 /*  Version  :                                                                    */
-/*  Date     : vrijdag 24 november 2017                                           */
+/*  Date     : zaterdag 25 november 2017                                          */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -19,7 +19,7 @@ CREATE TABLE `ABC_AUTH_LOGIN_RESPONSE` (
 );
 
 CREATE TABLE `ABC_AUTH_LOGIN_LOG` (
-  `llgi_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
+  `llg_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
   `cmp_id` SMALLINT UNSIGNED NOT NULL,
   `lgr_id` TINYINT UNSIGNED NOT NULL,
   `ses_id` INTEGER UNSIGNED,
@@ -27,7 +27,7 @@ CREATE TABLE `ABC_AUTH_LOGIN_LOG` (
   `llg_timestamp` TIMESTAMP DEFAULT now() NOT NULL,
   `llg_user_name` VARCHAR(64),
   `llg_ip4` INT UNSIGNED,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`llgi_id`)
+  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`llg_id`)
 );
 
 /*
@@ -60,19 +60,7 @@ ALTER TABLE `ABC_AUTH_LOGIN_RESPONSE`
   FOREIGN KEY (`wrd_id`) REFERENCES `ABC_BABEL_WORD` (`wrd_id`);
 
 ALTER TABLE `ABC_AUTH_LOGIN_LOG`
-  ADD CONSTRAINT `FK_ABC_AUTH_LOGIN_LOG_ABC_AUTH_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `ABC_AUTH_LOGIN_LOG`
   ADD CONSTRAINT `FK_ABC_AUTH_LOGIN_LOG_ABC_AUTH_LOGIN_RESPONSE`
   FOREIGN KEY (`lgr_id`) REFERENCES `ABC_AUTH_LOGIN_RESPONSE` (`lgr_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `ABC_AUTH_LOGIN_LOG`
-  ADD CONSTRAINT `FK_ABC_AUTH_LOGIN_LOG_ABC_AUTH_USER`
-  FOREIGN KEY (`usr_id`) REFERENCES `ABC_AUTH_USER` (`usr_id`)
   ON UPDATE NO ACTION
   ON DELETE NO ACTION;
