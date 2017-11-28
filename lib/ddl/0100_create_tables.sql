@@ -5,7 +5,7 @@
 /*  FileName : abc-login-handler-core.ecm                                         */
 /*  Platform : MySQL 5                                                            */
 /*  Version  :                                                                    */
-/*  Date     : zaterdag 25 november 2017                                          */
+/*  Date     : dinsdag 28 november 2017                                           */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -61,6 +61,4 @@ ALTER TABLE `ABC_AUTH_LOGIN_RESPONSE`
 
 ALTER TABLE `ABC_AUTH_LOGIN_LOG`
   ADD CONSTRAINT `FK_ABC_AUTH_LOGIN_LOG_ABC_AUTH_LOGIN_RESPONSE`
-  FOREIGN KEY (`lgr_id`) REFERENCES `ABC_AUTH_LOGIN_RESPONSE` (`lgr_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
+  FOREIGN KEY (`lgr_id`) REFERENCES `ABC_AUTH_LOGIN_RESPONSE` (`lgr_id`);
