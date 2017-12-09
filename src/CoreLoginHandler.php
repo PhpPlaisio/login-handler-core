@@ -12,6 +12,13 @@ abstract class CoreLoginHandler implements LoginHandler
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The data provided to the login requirements.
+   *
+   * @var array
+   */
+  protected $data = ['usr_id' => null, 'usr_name' => null];
+
+  /**
    * The ID of the login response.
    *
    * @var int
@@ -26,73 +33,89 @@ abstract class CoreLoginHandler implements LoginHandler
   protected $requirements = [];
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
-   * Returns the ID of the login response.
-   *
-   * @return int
+   * {@inheritdoc}
    */
-  public function getLgrId()
+  public function validate()
   {
-    if ($this->lgrId)
+    $continue = $this->preValidation();
+    if (!$continue) return null;
+
+    $granted = $this->validateRequirements();
+
+    if ($granted)
     {
-      throw new \LogicException('No login attempt made');
+      $this->postValidation();
+      $this->login();
     }
 
-    return $this->lgrId;
-  }
+    $this->logLoginAttempt();
 
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Validates whether the user agent is allowed to login.
-   *
-   * @param array $data The data for validating the credentials.
-   *
-   * @return bool
-   */
-  public function validate(&$data)
-  {
-    foreach ($this->requirements as $requirement)
-    {
-      $this->lgrId = $requirement->validate($data);
-
-      if ($this->lgrId!=C::LGR_ID_GRANTED) break;
-    }
-
-    $this->logLoginAttempt($data);
-    $this->login($data);
-
-    return ($this->lgrId==C::LGR_ID_GRANTED);
+    return $granted;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Logs the login attempt.
-   *
-   * @param array $data The data for validating the credentials.
    */
-  protected function logLoginAttempt($data)
+  protected function logLoginAttempt()
   {
     Abc::$DL->abcLoginHandlerCoreLogLogin(Abc::$companyResolver->getCmpId(),
                                           Abc::$session->getSesId(),
-                                          $data['usr_id'],
+                                          $this->data['usr_id'],
                                           $this->lgrId,
-                                          $data['usr_name'],
+                                          $this->data['usr_name'],
                                           $_SERVER['REMOTE_ADDR'] ?? null);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * On a successful login attempt updates the session with the proper ID of the user.
-   *
-   * @param array $data The data for validating the credentials.
+   * Updates the session with the proper ID of the user.
    */
-  protected function login($data)
+  protected function login()
   {
-    if ($this->lgrId==C::LGR_ID_GRANTED)
+    Abc::$session->login($this->data['usr_id']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Will be called only and only after all login requirements are successfully validated.
+   *
+   * @return void
+   */
+  abstract protected function postValidation();
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * This method will be called before validating the login requirements. Must return false when the pre-validation was
+   * preparation only (e.g. generation a login form only). When returns true the login requirements will be validated.
+   *
+   * @return bool
+   */
+  abstract protected function preValidation();
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Validates the login attempt against the login requirements.
+   *
+   * @return bool
+   */
+  private function validateRequirements()
+  {
+    if (empty($this->requirements))
     {
-      // The user has logged on successfully.
-      Abc::$session->login($data['usr_id']);
+      throw new \LogicException('One or more login requirements are required');
     }
+
+    foreach ($this->requirements as $requirement)
+    {
+      $this->lgrId = $requirement->validate($this->data);
+
+      if ($this->lgrId!=C::LGR_ID_GRANTED) return false;
+    }
+
+    return true;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

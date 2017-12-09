@@ -20,6 +20,7 @@ class CoreLoginHandlerTest extends TestCase
   private static $abc;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Test for method validate with successful login.
    */
@@ -28,10 +29,8 @@ class CoreLoginHandlerTest extends TestCase
     $requirements   = [];
     $requirements[] = new TestLoginRequirement(C::LGR_ID_GRANTED);
 
-    $handler = new TestCoreLoginHandler($requirements);
-    $data    = ['usr_id'   => '3',
-                'usr_name' => 'abc'];
-    $granted = $handler->validate($data);
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $granted = $handler->validate();
 
     self::assertTrue($granted);
     self::assertSame('3', TestSession::$usrId);
@@ -46,10 +45,8 @@ class CoreLoginHandlerTest extends TestCase
     $requirements   = [];
     $requirements[] = new TestLoginRequirement(C::LGR_ID_NOT_GRANTED);
 
-    $handler = new TestCoreLoginHandler($requirements);
-    $data    = ['usr_id'   => '3',
-                'usr_name' => 'abc'];
-    $granted = $handler->validate($data);
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $granted = $handler->validate();
 
     self::assertFalse($granted);
     self::assertNull(TestSession::$usrId);
@@ -66,10 +63,8 @@ class CoreLoginHandlerTest extends TestCase
     $requirements[] = new TestLoginRequirement(C::LGR_ID_NOT_GRANTED);
     $requirements[] = new TestLoginRequirement(C::LGR_ID_GRANTED);
 
-    $handler = new TestCoreLoginHandler($requirements);
-    $data    = ['usr_id'   => '3',
-                'usr_name' => 'abc'];
-    $granted = $handler->validate($data);
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $granted = $handler->validate();
 
     self::assertFalse($granted);
     self::assertNull(TestSession::$usrId);

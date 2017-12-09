@@ -5,12 +5,12 @@ namespace SetBased\Abc\Login\Test;
 use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Login\FailedLoginCountLoginRequirement;
+use SetBased\Abc\Login\WrongPasswordCountLoginRequirement;
 
 /**
- * Test cases for class FailedLoginCountLoginRequirement.
+ * Test cases for class WrongPasswordCountLoginRequirement.
  */
-class FailedLoginCountLoginRequirementTest extends TestCase
+class WrongPasswordCountLoginRequirementTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -21,18 +21,17 @@ class FailedLoginCountLoginRequirementTest extends TestCase
   private static $abc;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Test for method validate with successful login.
    */
   public function testValidate1()
   {
     $requirements   = [];
-    $requirements[] = new FailedLoginCountLoginRequirement(C::LGR_ID_TO_MANY_WRONG_PASSWORD, 3, 60);
+    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_TO_MANY_WRONG_PASSWORD, 3, 60);
 
-    $handler = new TestCoreLoginHandler($requirements);
-    $data    = ['usr_id'   => '3',
-                'usr_name' => 'abc'];
-    $granted = $handler->validate($data);
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $granted = $handler->validate();
 
     self::assertTrue($granted);
     self::assertSame('3', TestSession::$usrId);
@@ -46,21 +45,19 @@ class FailedLoginCountLoginRequirementTest extends TestCase
   {
     $requirements   = [];
     $requirements[] = new TestLoginRequirement(C::LGR_ID_WRONG_PASSWORD);
-    $requirements[] = new FailedLoginCountLoginRequirement(C::LGR_ID_TO_MANY_WRONG_PASSWORD, 3, 60);
+    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_TO_MANY_WRONG_PASSWORD, 3, 60);
 
-    $data    = ['usr_id'   => '3',
-                'usr_name' => 'abc'];
-    $handler = new TestCoreLoginHandler($requirements);
-    $handler->validate($data);
-    $handler->validate($data);
-    $handler->validate($data);
-    $handler->validate($data);
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $handler->validate();
+    $handler->validate();
+    $handler->validate();
+    $handler->validate();
 
     $requirements   = [];
     $requirements[] = new TestLoginRequirement(C::LGR_ID_GRANTED);
-    $requirements[] = new FailedLoginCountLoginRequirement(C::LGR_ID_WRONG_PASSWORD, 3, 60);
-    $handler        = new TestCoreLoginHandler($requirements);
-    $granted        = $handler->validate($data);
+    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_WRONG_PASSWORD, 3, 60);
+    $handler        = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $granted        = $handler->validate();
 
     self::assertFalse($granted);
     self::assertNull(TestSession::$usrId);

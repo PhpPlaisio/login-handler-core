@@ -6,9 +6,9 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
 /**
- * Login requirement: Maximum number of failed of login attempts.
+ * Login requirement: Maximum number of failed of login attempts due to a wrong password.
  */
-class FailedLoginCountLoginRequirement implements LoginRequirement
+class WrongPasswordCountLoginRequirement implements LoginRequirement
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -34,7 +34,7 @@ class FailedLoginCountLoginRequirement implements LoginRequirement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * FailedLoginCountLoginRequirement constructor.
+   * WrongPasswordCountLoginRequirement constructor.
    *
    * @param int $lgrId             The ID of the login response for a wrong password.
    * @param int $maxFailedAttempts The maximum number of allowed failed login attempts due to a wrong password.
