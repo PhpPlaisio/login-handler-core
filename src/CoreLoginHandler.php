@@ -16,7 +16,7 @@ abstract class CoreLoginHandler implements LoginHandler
    *
    * @var array
    */
-  protected $data = ['usr_id' => null, 'usr_name' => null];
+  protected $data = [];
 
   /**
    * The ID of the login response.
@@ -31,6 +31,17 @@ abstract class CoreLoginHandler implements LoginHandler
    * @var LoginRequirement[]
    */
   protected $requirements = [];
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the (initial) data for validating the login request.
+   *
+   * @param array $data The data for validating the login request.
+   */
+  public function setData($data)
+  {
+    $this->data = $data;
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -58,7 +69,11 @@ abstract class CoreLoginHandler implements LoginHandler
    *
    * @return void
    */
-  abstract protected function postValidation($granted);
+  protected function postValidation($granted)
+  {
+    unset($granted);
+    // Nothing to do.
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -67,7 +82,11 @@ abstract class CoreLoginHandler implements LoginHandler
    *
    * @return bool
    */
-  abstract protected function preValidation();
+  protected function preValidation()
+  {
+    // Nothing to do.
+    return true;
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
