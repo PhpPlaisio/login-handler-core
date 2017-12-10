@@ -33,7 +33,6 @@ abstract class CoreLoginHandler implements LoginHandler
   protected $requirements = [];
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * {@inheritdoc}
    */
@@ -44,12 +43,8 @@ abstract class CoreLoginHandler implements LoginHandler
 
     $granted = $this->validateRequirements();
 
-    if ($granted)
-    {
-      $this->postValidation();
-      $this->login();
-    }
-
+    $this->postValidation($granted);
+    $this->login();
     $this->logLoginAttempt();
 
     return $granted;
@@ -57,9 +52,28 @@ abstract class CoreLoginHandler implements LoginHandler
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Will be called only and only after all login requirements are successfully validated.
+   *
+   * @param bool $granted True if login is granted, false otherwise.
+   *
+   * @return void
+   */
+  abstract protected function postValidation($granted);
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * This method will be called before validating the login requirements. Must return false when the pre-validation was
+   * preparation only (e.g. generation a login form only). When returns true the login requirements will be validated.
+   *
+   * @return bool
+   */
+  abstract protected function preValidation();
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Logs the login attempt.
    */
-  protected function logLoginAttempt()
+  private function logLoginAttempt()
   {
     Abc::$DL->abcLoginHandlerCoreLogLogin(Abc::$companyResolver->getCmpId(),
                                           Abc::$session->getSesId(),
@@ -71,29 +85,15 @@ abstract class CoreLoginHandler implements LoginHandler
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Updates the session with the proper ID of the user.
+   * Updates the session with the proper ID of the user if and only if login is granted.
    */
-  protected function login()
+  private function login()
   {
-    Abc::$session->login($this->data['usr_id']);
+    if ($this->lgrId==C::LGR_ID_GRANTED)
+    {
+      Abc::$session->login($this->data['usr_id']);
+    }
   }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Will be called only and only after all login requirements are successfully validated.
-   *
-   * @return void
-   */
-  abstract protected function postValidation();
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * This method will be called before validating the login requirements. Must return false when the pre-validation was
-   * preparation only (e.g. generation a login form only). When returns true the login requirements will be validated.
-   *
-   * @return bool
-   */
-  abstract protected function preValidation();
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

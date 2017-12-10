@@ -26,8 +26,10 @@ class TestCoreLoginHandler extends CoreLoginHandler
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Does nothing.
+   *
+   * @param bool $granted
    */
-  protected function postValidation()
+  protected function postValidation($granted)
   {
     // Noting to do.
   }
