@@ -6,7 +6,7 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
 /**
- * Login requirement: Maximum number of failed of login attempts due to a wrong password.
+ * Login requirement: Maximum number of failed login attempts cause by a wrong password.
  */
 class WrongPasswordCountLoginRequirement implements LoginRequirement
 {
@@ -49,7 +49,7 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Validates the user exists.
+   * Validates the number of failed login attempts caused by a wrong password is within limits.
    *
    * @param array $data The data for validating the login requirement.
    *
