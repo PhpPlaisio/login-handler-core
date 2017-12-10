@@ -33,6 +33,7 @@ abstract class CoreLoginHandler implements LoginHandler
   protected $requirements = [];
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Sets the (initial) data for validating the login request.
    *
