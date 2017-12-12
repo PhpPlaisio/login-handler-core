@@ -19,7 +19,7 @@ class StaticLoginRequirement implements LoginRequirement
   /**
    * Object constructor.
    *
-   * @param int $lgrId The ID of the login response.
+   * @param int|null $lgrId The ID of the login response.
    */
   public function __construct($lgrId)
   {
@@ -32,7 +32,7 @@ class StaticLoginRequirement implements LoginRequirement
    *
    * @param array $data Not used.
    *
-   * @return int
+   * @return int|null
    */
   public function validate(&$data)
   {

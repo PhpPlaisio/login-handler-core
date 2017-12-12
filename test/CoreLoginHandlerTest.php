@@ -5,6 +5,7 @@ namespace SetBased\Abc\Login\Test;
 use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
+use SetBased\Abc\Login\StaticLoginRequirement;
 
 /**
  * Test cases for class CoreLoginHandlerTest.
@@ -27,7 +28,7 @@ class CoreLoginHandlerTest extends TestCase
   public function testValidate1()
   {
     $requirements   = [];
-    $requirements[] = new TestLoginRequirement(C::LGR_ID_GRANTED);
+    $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
 
     $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
     $granted = $handler->validate();
@@ -43,7 +44,7 @@ class CoreLoginHandlerTest extends TestCase
   public function testValidate2()
   {
     $requirements   = [];
-    $requirements[] = new TestLoginRequirement(C::LGR_ID_NOT_GRANTED);
+    $requirements[] = new StaticLoginRequirement(C::LGR_ID_NOT_GRANTED);
 
     $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
     $granted = $handler->validate();
@@ -59,14 +60,33 @@ class CoreLoginHandlerTest extends TestCase
   public function testValidate3()
   {
     $requirements   = [];
-    $requirements[] = new TestLoginRequirement(C::LGR_ID_GRANTED);
-    $requirements[] = new TestLoginRequirement(C::LGR_ID_NOT_GRANTED);
-    $requirements[] = new TestLoginRequirement(C::LGR_ID_GRANTED);
+    $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
+    $requirements[] = new StaticLoginRequirement(C::LGR_ID_NOT_GRANTED);
+    $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
 
     $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
     $granted = $handler->validate();
 
     self::assertFalse($granted);
+    self::assertNull(TestSession::$usrId);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test for method validate with unsuccessful login.
+   */
+  public function testValidate4()
+  {
+    $requirements   = [];
+    $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
+    $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
+    $requirements[] = new StaticLoginRequirement(null);
+    $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
+
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $granted = $handler->validate();
+
+    self::assertNull($granted);
     self::assertNull(TestSession::$usrId);
   }
 

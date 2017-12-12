@@ -5,6 +5,7 @@ namespace SetBased\Abc\Login\Test;
 use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
+use SetBased\Abc\Login\StaticLoginRequirement;
 use SetBased\Abc\Login\WrongPasswordCountLoginRequirement;
 
 /**
@@ -44,7 +45,7 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   public function testValidate2()
   {
     $requirements   = [];
-    $requirements[] = new TestLoginRequirement(C::LGR_ID_WRONG_PASSWORD);
+    $requirements[] = new StaticLoginRequirement(C::LGR_ID_WRONG_PASSWORD);
     $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_TO_MANY_WRONG_PASSWORD, 3, 60);
 
     $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
@@ -54,7 +55,7 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
     $handler->validate();
 
     $requirements   = [];
-    $requirements[] = new TestLoginRequirement(C::LGR_ID_GRANTED);
+    $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
     $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_WRONG_PASSWORD, 3, 60);
     $handler        = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
     $granted        = $handler->validate();

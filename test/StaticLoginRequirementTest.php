@@ -40,6 +40,20 @@ class StaticLoginRequirementTest extends TestCase
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  public function testValidate03()
+  {
+    $requirement = new StaticLoginRequirement(null);
+
+    $data  = [];
+    $lgrId = $requirement->validate($data);
+    self::assertNull($lgrId);
+
+    $data  = ['usr_id' => '3', 'usr_name' => 'abc'];
+    $lgrId = $requirement->validate($data);
+    self::assertNull($lgrId);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------

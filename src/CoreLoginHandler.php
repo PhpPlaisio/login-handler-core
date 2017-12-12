@@ -33,7 +33,6 @@ abstract class CoreLoginHandler implements LoginHandler
   protected $requirements = [];
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Sets the (initial) data for validating the login request.
    *
@@ -54,8 +53,11 @@ abstract class CoreLoginHandler implements LoginHandler
     if (!$continue) return null;
 
     $granted = $this->validateRequirements();
+    if ($granted===null) return null;
 
-    $this->postValidation($granted);
+    $continue = $this->postValidation($granted);
+    if (!$continue) return null;
+
     $this->login();
     $this->logLoginAttempt();
 
@@ -68,24 +70,24 @@ abstract class CoreLoginHandler implements LoginHandler
    *
    * @param bool $granted True if login is granted, false otherwise.
    *
-   * @return void
+   * @return true
    */
   protected function postValidation($granted)
   {
     unset($granted);
-    // Nothing to do.
+
+    return true;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * This method will be called before validating the login requirements. Must return false when the pre-validation was
-   * preparation only (e.g. generation a login form only). When returns true the login requirements will be validated.
+   * preparation only (e.g. showing a login form only). When returns true the login requirements will be validated.
    *
-   * @return bool
+   * @return true
    */
   protected function preValidation()
   {
-    // Nothing to do.
     return true;
   }
 
@@ -119,7 +121,7 @@ abstract class CoreLoginHandler implements LoginHandler
   /**
    * Validates the login attempt against the login requirements.
    *
-   * @return bool
+   * @return bool|null
    */
   private function validateRequirements()
   {
@@ -132,6 +134,7 @@ abstract class CoreLoginHandler implements LoginHandler
     {
       $this->lgrId = $requirement->validate($this->data);
 
+      if ($this->lgrId===null) return null;
       if ($this->lgrId!=C::LGR_ID_GRANTED) return false;
     }
 
