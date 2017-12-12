@@ -85,7 +85,7 @@ abstract class CoreLoginHandler implements LoginHandler
    *
    * @param bool $granted True if login is granted, false otherwise.
    *
-   * @return true
+   * @return bool
    *
    * @since 1.0.0
    * @api
@@ -102,7 +102,7 @@ abstract class CoreLoginHandler implements LoginHandler
    * This method will be called before validating the login requirements. Must return false when the pre-validation was
    * preparation only (e.g. showing a login form only). When returns true the login requirements will be validated.
    *
-   * @return true
+   * @return bool
    *
    * @since 1.0.0
    * @api
