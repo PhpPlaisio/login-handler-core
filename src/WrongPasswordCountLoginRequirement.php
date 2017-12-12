@@ -39,6 +39,9 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
    * @param int $lgrId             The ID of the login response for a wrong password.
    * @param int $maxFailedAttempts The maximum number of allowed failed login attempts due to a wrong password.
    * @param int $minutes           The length of the interval in minutes.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function __construct($lgrId, $maxFailedAttempts, $minutes)
   {
@@ -54,6 +57,9 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
    * @param array $data The data for validating the login requirement.
    *
    * @return int
+   *
+   * @since 1.0.0
+   * @api
    */
   public function validate(&$data)
   {

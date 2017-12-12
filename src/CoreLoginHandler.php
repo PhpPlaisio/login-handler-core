@@ -15,6 +15,9 @@ abstract class CoreLoginHandler implements LoginHandler
    * The data provided to the login requirements.
    *
    * @var array
+   *
+   * @since 1.0.0
+   * @api
    */
   protected $data = [];
 
@@ -22,6 +25,9 @@ abstract class CoreLoginHandler implements LoginHandler
    * The ID of the login response.
    *
    * @var int
+   *
+   * @since 1.0.0
+   * @api
    */
   protected $lgrId;
 
@@ -29,6 +35,9 @@ abstract class CoreLoginHandler implements LoginHandler
    * The list of login requirements.
    *
    * @var LoginRequirement[]
+   *
+   * @since 1.0.0
+   * @api
    */
   protected $requirements = [];
 
@@ -37,6 +46,9 @@ abstract class CoreLoginHandler implements LoginHandler
    * Sets the (initial) data for validating the login request.
    *
    * @param array $data The data for validating the login request.
+   *
+   * @since 1.0.0
+   * @api
    */
   public function setData($data)
   {
@@ -46,6 +58,9 @@ abstract class CoreLoginHandler implements LoginHandler
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
+   *
+   * @since 1.0.0
+   * @api
    */
   public function validate()
   {
@@ -71,6 +86,9 @@ abstract class CoreLoginHandler implements LoginHandler
    * @param bool $granted True if login is granted, false otherwise.
    *
    * @return true
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function postValidation($granted)
   {
@@ -85,6 +103,9 @@ abstract class CoreLoginHandler implements LoginHandler
    * preparation only (e.g. showing a login form only). When returns true the login requirements will be validated.
    *
    * @return true
+   *
+   * @since 1.0.0
+   * @api
    */
   protected function preValidation()
   {
