@@ -29,7 +29,10 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   public function testValidate1()
   {
     $requirements   = [];
-    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_TO_MANY_WRONG_PASSWORD, 3, 60);
+    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_WRONG_PASSWORD,
+                                                             C::LGR_ID_TO_MANY_WRONG_PASSWORD,
+                                                             3,
+                                                             60);
 
     $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
     $granted = $handler->validate();
@@ -46,7 +49,10 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   {
     $requirements   = [];
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_WRONG_PASSWORD);
-    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_TO_MANY_WRONG_PASSWORD, 3, 60);
+    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_WRONG_PASSWORD,
+                                                             C::LGR_ID_TO_MANY_WRONG_PASSWORD,
+                                                             3,
+                                                             60);
 
     $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
     $handler->validate();
@@ -56,7 +62,10 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
 
     $requirements   = [];
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
-    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_WRONG_PASSWORD, 3, 60);
+    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_WRONG_PASSWORD,
+                                                             C::LGR_ID_TO_MANY_WRONG_PASSWORD,
+                                                             3,
+                                                             60);
     $handler        = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
     $granted        = $handler->validate();
 

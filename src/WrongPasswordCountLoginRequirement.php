@@ -19,11 +19,18 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
   private $interval;
 
   /**
+   * The ID of the login response for to many wrong passwords.
+   *
+   * @var int
+   */
+  private $lgrIdToManyWrongPassword;
+
+  /**
    * The ID of the login response for a wrong password.
    *
    * @var int
    */
-  private $lgrId;
+  private $lgrIdWrongPassword;
 
   /**
    * The maximum number of allowed failed login attempts due to a wrong password.
@@ -36,18 +43,20 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
   /**
    * WrongPasswordCountLoginRequirement constructor.
    *
-   * @param int $lgrId             The ID of the login response for a wrong password.
-   * @param int $maxFailedAttempts The maximum number of allowed failed login attempts due to a wrong password.
-   * @param int $minutes           The length of the interval in minutes.
+   * @param int $lgrIdWrongPassword       The ID of the login response for a wrong password.
+   * @param int $lgrIdToManyWrongPassword The ID of the login response for to many wrong passwords.
+   * @param int $maxFailedAttempts        The maximum number of allowed failed login attempts due to a wrong password.
+   * @param int $minutes                  The length of the interval in minutes.
    *
    * @since 1.0.0
    * @api
    */
-  public function __construct($lgrId, $maxFailedAttempts, $minutes)
+  public function __construct($lgrIdWrongPassword, $lgrIdToManyWrongPassword, $maxFailedAttempts, $minutes)
   {
-    $this->lgrId             = $lgrId;
-    $this->maxFailedAttempts = $maxFailedAttempts;
-    $this->interval          = $minutes;
+    $this->lgrIdWrongPassword       = $lgrIdWrongPassword;
+    $this->lgrIdToManyWrongPassword = $lgrIdToManyWrongPassword;
+    $this->maxFailedAttempts        = $maxFailedAttempts;
+    $this->interval                 = $minutes;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -65,10 +74,10 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
   {
     $count = Abc::$DL->abcLoginHandlerCoreWrongPasswordByUsrIdCount(Abc::$companyResolver->getCmpId(),
                                                                     $data['usr_id'],
-                                                                    $this->lgrId,
+                                                                    $this->lgrIdWrongPassword,
                                                                     $this->interval);
 
-    return ($count<=$this->maxFailedAttempts) ? C::LGR_ID_GRANTED : C::LGR_ID_TO_MANY_WRONG_PASSWORD;
+    return ($count<=$this->maxFailedAttempts) ? C::LGR_ID_GRANTED : $this->lgrIdToManyWrongPassword;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
