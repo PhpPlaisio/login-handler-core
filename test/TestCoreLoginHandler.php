@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Login\Test;
 
 use SetBased\Abc\Login\CoreLoginHandler;

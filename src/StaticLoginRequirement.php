@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Login;
 
 /**
@@ -16,6 +16,7 @@ class StaticLoginRequirement implements LoginRequirement
   private $lgrId;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
@@ -24,7 +25,7 @@ class StaticLoginRequirement implements LoginRequirement
    * @since 1.0.0
    * @api
    */
-  public function __construct($lgrId)
+  public function __construct(?int $lgrId)
   {
     $this->lgrId = $lgrId;
   }
@@ -40,7 +41,7 @@ class StaticLoginRequirement implements LoginRequirement
    * @since 1.0.0
    * @api
    */
-  public function validate(&$data)
+  public function validate(array &$data): ?int
   {
     return $this->lgrId;
   }

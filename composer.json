@@ -10,15 +10,15 @@
   "type": "library",
   "license": "MIT",
   "require": {
-    "php": ">=7.0.0",
-    "setbased/abc": "^0.10.27",
-    "setbased/abc-login-handler": "^1.0.0",
-    "setbased/abc-login-requirement": "^1.0.0"
+    "php": ">=7.1.0",
+    "setbased/abc": "^0.10.34",
+    "setbased/abc-login-handler": "^2.0.0",
+    "setbased/abc-login-requirement": "^2.0.0"
   },
   "require-dev": {
     "phing/phing": "^2.0.0",
     "phpunit/phpunit": "^6.0.0",
-    "setbased/php-stratum": "^0.9.50"
+    "setbased/php-stratum": "^0.9.62"
   },
   "autoload": {
     "psr-4": {

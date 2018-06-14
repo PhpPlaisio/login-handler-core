@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Login\Test;
 
 use SetBased\Abc\C;
@@ -16,7 +16,7 @@ class TestCompanyResolver implements CompanyResolver
    *
    * @return int
    */
-  public function getCmpId()
+  public function getCmpId(): int
   {
     return C::CMP_ID_SYS;
   }

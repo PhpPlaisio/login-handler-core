@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Login;
 
 use SetBased\Abc\Abc;
@@ -51,7 +51,10 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
    * @since 1.0.0
    * @api
    */
-  public function __construct($lgrIdWrongPassword, $lgrIdToManyWrongPassword, $maxFailedAttempts, $minutes)
+  public function __construct(int $lgrIdWrongPassword,
+                              int $lgrIdToManyWrongPassword,
+                              int $maxFailedAttempts,
+                              int $minutes)
   {
     $this->lgrIdWrongPassword       = $lgrIdWrongPassword;
     $this->lgrIdToManyWrongPassword = $lgrIdToManyWrongPassword;
@@ -70,7 +73,7 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
    * @since 1.0.0
    * @api
    */
-  public function validate(&$data)
+  public function validate(array &$data): int
   {
     $count = Abc::$DL->abcLoginHandlerCoreWrongPasswordByUsrIdCount(Abc::$companyResolver->getCmpId(),
                                                                     $data['usr_id'],

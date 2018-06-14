@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Login;
 
 use SetBased\Abc\Abc;
@@ -47,10 +47,12 @@ abstract class CoreLoginHandler implements LoginHandler
    *
    * @param array $data The data for validating the login request.
    *
+   * @return void
+   *
    * @since 1.0.0
    * @api
    */
-  public function setData($data)
+  public function setData(array $data): void
   {
     $this->data = $data;
   }
@@ -62,7 +64,7 @@ abstract class CoreLoginHandler implements LoginHandler
    * @since 1.0.0
    * @api
    */
-  public function validate()
+  public function validate(): ?bool
   {
     $continue = $this->preValidation();
     if (!$continue) return null;
@@ -90,7 +92,7 @@ abstract class CoreLoginHandler implements LoginHandler
    * @since 1.0.0
    * @api
    */
-  protected function postValidation($granted)
+  protected function postValidation(bool $granted): bool
   {
     unset($granted);
 
@@ -107,7 +109,7 @@ abstract class CoreLoginHandler implements LoginHandler
    * @since 1.0.0
    * @api
    */
-  protected function preValidation()
+  protected function preValidation(): bool
   {
     return true;
   }
@@ -116,7 +118,7 @@ abstract class CoreLoginHandler implements LoginHandler
   /**
    * Logs the login attempt.
    */
-  private function logLoginAttempt()
+  private function logLoginAttempt(): void
   {
     Abc::$DL->abcLoginHandlerCoreLogLogin(Abc::$companyResolver->getCmpId(),
                                           Abc::$session->getSesId(),
@@ -130,7 +132,7 @@ abstract class CoreLoginHandler implements LoginHandler
   /**
    * Updates the session with the proper ID of the user if and only if login is granted.
    */
-  private function login()
+  private function login(): void
   {
     if ($this->lgrId==C::LGR_ID_GRANTED)
     {
@@ -144,7 +146,7 @@ abstract class CoreLoginHandler implements LoginHandler
    *
    * @return bool|null
    */
-  private function validateRequirements()
+  private function validateRequirements(): ?bool
   {
     if (empty($this->requirements))
     {
