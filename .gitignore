@@ -1,7 +1,9 @@
 /.idea/
 /bin
 /composer.lock
+/test/TestDataLayer.php
+/test/coverage.xml
 /test/etc/columns.txt
 /test/etc/routines.json
-/test/TestDataLayer.php
+/test/report/
 /vendor

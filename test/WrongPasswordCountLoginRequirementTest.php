@@ -38,7 +38,7 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
     $granted = $handler->validate();
 
     self::assertTrue($granted);
-    self::assertSame('3', TestSession::$usrId);
+    self::assertSame(3, TestSession::$usrId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

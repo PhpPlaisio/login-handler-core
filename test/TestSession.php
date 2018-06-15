@@ -25,7 +25,7 @@ class TestSession implements Session
    *
    * @deprecated Use Abc::$companyResolver->getCmpId() instead.
    */
-  public function getCmpId()
+  public function getCmpId(): int
   {
     throw new \LogicException('Not implemented');
   }
@@ -36,7 +36,7 @@ class TestSession implements Session
    *
    * @return string
    */
-  public function getCsrfToken()
+  public function getCsrfToken(): string
   {
     throw new \LogicException('Not implemented');
   }
@@ -47,7 +47,7 @@ class TestSession implements Session
    *
    * @return int
    */
-  public function getLanId()
+  public function getLanId(): int
   {
     throw new \LogicException('Not implemented');
   }
@@ -58,7 +58,7 @@ class TestSession implements Session
    *
    * @return int
    */
-  public function getProId()
+  public function getProId(): int
   {
     throw new \LogicException('Not implemented');
   }
@@ -69,7 +69,7 @@ class TestSession implements Session
    *
    * @return int|null
    */
-  public function getSesId()
+  public function getSesId(): ?int
   {
     return null;
   }
@@ -80,7 +80,7 @@ class TestSession implements Session
    *
    * @return string
    */
-  public function getSessionToken()
+  public function getSessionToken(): string
   {
     throw new \LogicException('Not implemented');
   }
@@ -91,7 +91,7 @@ class TestSession implements Session
    *
    * @return int
    */
-  public function getUsrId()
+  public function getUsrId(): int
   {
     throw new \LogicException('Not implemented');
   }
@@ -102,7 +102,7 @@ class TestSession implements Session
    *
    * @return bool
    */
-  public function isAnonymous()
+  public function isAnonymous(): bool
   {
     throw new \LogicException('Not implemented');
   }
@@ -115,7 +115,7 @@ class TestSession implements Session
    *
    * @return void
    */
-  public function login($usrId)
+  public function login(int $usrId): void
   {
     self::$usrId = $usrId;
   }
@@ -126,7 +126,7 @@ class TestSession implements Session
    *
    * @return void
    */
-  public function logout()
+  public function logout(): void
   {
     throw new \LogicException('Not implemented');
   }
@@ -137,7 +137,7 @@ class TestSession implements Session
    *
    * @return void
    */
-  public function save()
+  public function save(): void
   {
     throw new \LogicException('Not implemented');
   }
@@ -148,7 +148,7 @@ class TestSession implements Session
    *
    * @param int $lanId The ID of the new language.
    */
-  public function setLanId($lanId)
+  public function setLanId(int $lanId): void
   {
     throw new \LogicException('Not implemented');
   }
@@ -159,7 +159,7 @@ class TestSession implements Session
    *
    * @return void
    */
-  public function start()
+  public function start(): void
   {
     throw new \LogicException('Not implemented');
   }
