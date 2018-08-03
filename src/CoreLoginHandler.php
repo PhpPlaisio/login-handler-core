@@ -125,7 +125,7 @@ abstract class CoreLoginHandler implements LoginHandler
                                           $this->data['usr_id'] ?? null,
                                           $this->lgrId,
                                           $this->data['usr_name'] ?? null,
-                                          $_SERVER['REMOTE_ADDR'] ?? null);
+                                          Abc::$request->getRemoteIp());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
