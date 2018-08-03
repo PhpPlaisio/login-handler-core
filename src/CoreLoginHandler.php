@@ -122,9 +122,9 @@ abstract class CoreLoginHandler implements LoginHandler
   {
     Abc::$DL->abcLoginHandlerCoreLogLogin(Abc::$companyResolver->getCmpId(),
                                           Abc::$session->getSesId(),
-                                          $this->data['usr_id'],
+                                          $this->data['usr_id'] ?? null,
                                           $this->lgrId,
-                                          $this->data['usr_name'],
+                                          $this->data['usr_name'] ?? null,
                                           $_SERVER['REMOTE_ADDR'] ?? null);
   }
 
