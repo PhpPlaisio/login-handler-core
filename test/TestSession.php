@@ -18,6 +18,7 @@ class TestSession implements Session
   public static $usrId;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Returns the ID of company of the current session.
    *
@@ -48,6 +49,26 @@ class TestSession implements Session
    * @return int
    */
   public function getLanId(): int
+  {
+    throw new \LogicException('Not implemented');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a reference to the data of a named section of the session.
+   *
+   * If the named section does not yet exists a reference to null is returned. Only named sections opened in shared
+   * and exclusive mode will be saved by @see save.
+   *
+   * @param string $name The name of the named section.
+   * @param int    $mode The mode for getting the named section.
+   *
+   * @return mixed
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function &getNamedSection(string $name, int $mode)
   {
     throw new \LogicException('Not implemented');
   }
