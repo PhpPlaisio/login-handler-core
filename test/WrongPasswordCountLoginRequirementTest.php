@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Login\Test;
 
@@ -26,7 +27,7 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   /**
    * Test for method validate with successful login.
    */
-  public function testValidate1()
+  public function testValidate1(): void
   {
     $requirements   = [];
     $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_WRONG_PASSWORD,
@@ -34,7 +35,7 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
                                                              3,
                                                              60);
 
-    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
     $granted = $handler->validate();
 
     self::assertTrue($granted);
@@ -45,7 +46,7 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   /**
    * Test for method validate with to many failed password.
    */
-  public function testValidate2()
+  public function testValidate2(): void
   {
     $requirements   = [];
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_WRONG_PASSWORD);
@@ -54,7 +55,7 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
                                                              3,
                                                              60);
 
-    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
     $handler->validate();
     $handler->validate();
     $handler->validate();
@@ -66,7 +67,7 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
                                                              C::LGR_ID_TO_MANY_WRONG_PASSWORD,
                                                              3,
                                                              60);
-    $handler        = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $handler        = new TestCoreLoginHandler($requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
     $granted        = $handler->validate();
 
     self::assertFalse($granted);
@@ -77,7 +78,7 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   /**
    * Connects to the MySQL server and cleans the BLOB tables.
    */
-  protected function setUp()
+  protected function setUp(): void
   {
     self::$abc = new TestAbc();
 
@@ -89,7 +90,7 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   /**
    * Disconnects from the MySQL server.
    */
-  protected function tearDown()
+  protected function tearDown(): void
   {
     Abc::$DL->commit();
     Abc::$DL->disconnect();

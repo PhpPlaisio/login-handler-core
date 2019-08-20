@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Login\Test;
 
@@ -25,12 +26,12 @@ class CoreLoginHandlerTest extends TestCase
   /**
    * Test for method validate with successful login.
    */
-  public function testValidate1()
+  public function testValidate1(): void
   {
     $requirements   = [];
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
 
-    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
     $granted = $handler->validate();
 
     self::assertTrue($granted);
@@ -41,12 +42,12 @@ class CoreLoginHandlerTest extends TestCase
   /**
    * Test for method validate with unsuccessful login.
    */
-  public function testValidate2()
+  public function testValidate2(): void
   {
     $requirements   = [];
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_NOT_GRANTED);
 
-    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
     $granted = $handler->validate();
 
     self::assertFalse($granted);
@@ -57,14 +58,14 @@ class CoreLoginHandlerTest extends TestCase
   /**
    * Test for method validate with unsuccessful login. Testing requirements must stop after first failed requirement.
    */
-  public function testValidate3()
+  public function testValidate3(): void
   {
     $requirements   = [];
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_NOT_GRANTED);
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
 
-    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
     $granted = $handler->validate();
 
     self::assertFalse($granted);
@@ -75,7 +76,7 @@ class CoreLoginHandlerTest extends TestCase
   /**
    * Test for method validate with unsuccessful login.
    */
-  public function testValidate4()
+  public function testValidate4(): void
   {
     $requirements   = [];
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
@@ -83,7 +84,7 @@ class CoreLoginHandlerTest extends TestCase
     $requirements[] = new StaticLoginRequirement(null);
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
 
-    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => '3', 'usr_name' => 'abc']);
+    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
     $granted = $handler->validate();
 
     self::assertNull($granted);
@@ -94,7 +95,7 @@ class CoreLoginHandlerTest extends TestCase
   /**
    * Connects to the MySQL server and cleans the BLOB tables.
    */
-  protected function setUp()
+  protected function setUp(): void
   {
     self::$abc = new TestAbc();
 
@@ -106,7 +107,7 @@ class CoreLoginHandlerTest extends TestCase
   /**
    * Disconnects from the MySQL server.
    */
-  protected function tearDown()
+  protected function tearDown(): void
   {
     Abc::$DL->commit();
     Abc::$DL->disconnect();

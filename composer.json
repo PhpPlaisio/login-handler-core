@@ -17,9 +17,10 @@
   },
   "require-dev": {
     "phing/phing": "^2.0.0",
-    "phpunit/phpunit": "^6.0.0",
+    "phpunit/phpunit": "^7.0.0 || ^8.0.0",
     "setbased/abc-request-core": "*",
-    "setbased/php-stratum": "^0.9.62"
+    "setbased/php-stratum": "^4.0.0",
+    "setbased/php-stratum-mysql": "^4.0.0"
 
   },
   "autoload": {
