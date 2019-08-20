@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Login\Test;
 
@@ -18,7 +19,6 @@ class TestSession implements Session
   public static $usrId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Returns the ID of company of the current session.
    *
