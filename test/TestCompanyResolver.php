@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Login\Test;
+namespace Plaisio\Login\Test;
 
-use SetBased\Abc\C;
-use SetBased\Abc\CompanyResolver\CompanyResolver;
+use Plaisio\C;
+use Plaisio\CompanyResolver\CompanyResolver;
 
 /**
  * Mock framework for testing purposes.

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Login;
+namespace Plaisio\Login;
 
 /**
  * Login requirement: Always returns the  ID of the same login response.

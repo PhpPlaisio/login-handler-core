@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Login;
+namespace Plaisio\Login;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * The core login handler using a list of login requirements.
@@ -43,6 +43,7 @@ abstract class CoreLoginHandler implements LoginHandler
   protected $requirements = [];
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Sets the (initial) data for validating the login request.
    *
@@ -121,12 +122,12 @@ abstract class CoreLoginHandler implements LoginHandler
    */
   private function logLoginAttempt(): void
   {
-    Abc::$DL->abcLoginHandlerCoreLogLogin(Abc::$companyResolver->getCmpId(),
-                                          Abc::$session->getSesId(),
+    Nub::$DL->abcLoginHandlerCoreLogLogin(Nub::$companyResolver->getCmpId(),
+                                          Nub::$session->getSesId(),
                                           $this->data['usr_id'] ?? null,
                                           $this->lgrId,
                                           $this->data['usr_name'] ?? null,
-                                          Abc::$request->getRemoteIp());
+                                          Nub::$request->getRemoteIp());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -137,7 +138,7 @@ abstract class CoreLoginHandler implements LoginHandler
   {
     if ($this->lgrId==C::LGR_ID_GRANTED)
     {
-      Abc::$session->login($this->data['usr_id']);
+      Nub::$session->login($this->data['usr_id']);
     }
   }
 

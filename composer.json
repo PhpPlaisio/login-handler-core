@@ -1,36 +1,35 @@
 {
-  "name": "setbased/abc-login-handler-core",
-  "description": "ABC-Framework: Core Login Handler",
+  "name": "plaisio/login-handler-core",
+  "description": "PhpPlaisio: Core Login Handler",
   "keywords": [
-    "ABC-Framework",
-    "Login",
-    "Handler",
+    "PhpPlaisio",
+    "Login Handler",
     "Core"
   ],
   "type": "library",
   "license": "MIT",
   "require": {
     "php": ">=7.1.0",
-    "setbased/abc": "^0.10.37",
-    "setbased/abc-login-handler": "^2.0.0",
-    "setbased/abc-login-requirement": "^2.0.0"
+    "plaisio/kernel": "^1.0.0",
+    "plaisio/login-handler": "^1.0.0",
+    "plaisio/login-requirement": "^1.0.0"
   },
   "require-dev": {
     "phing/phing": "^2.0.0",
     "phpunit/phpunit": "^7.0.0 || ^8.0.0",
-    "setbased/abc-request-core": "*",
-    "setbased/php-stratum": "^4.0.0",
+    "plaisio/request-core": "^0.10.0",
+    "setbased/php-stratum": "^5.0.0",
     "setbased/php-stratum-mysql": "^4.0.0"
 
   },
   "autoload": {
     "psr-4": {
-      "SetBased\\Abc\\Login\\": "src/"
+      "Plaisio\\Login\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "SetBased\\Abc\\Login\\Test\\": "test/"
+      "Plaisio\\Login\\Test\\": "test/"
     },
     "classmap": [
       "test/C.php"

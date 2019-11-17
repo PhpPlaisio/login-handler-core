@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Login\Test;
+namespace Plaisio\Login\Test;
 
-use SetBased\Abc\Login\CoreLoginHandler;
-use SetBased\Abc\Login\LoginRequirement;
+use Plaisio\Login\CoreLoginHandler;
+use Plaisio\Login\LoginRequirement;
 
 /**
  * Mock framework for testing purposes.

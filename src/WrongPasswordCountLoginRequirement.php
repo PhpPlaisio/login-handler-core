@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Login;
+namespace Plaisio\Login;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Login requirement: Maximum number of failed login attempts cause by a wrong password.
@@ -41,6 +41,7 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
   private $maxFailedAttempts;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * WrongPasswordCountLoginRequirement constructor.
    *
@@ -76,7 +77,7 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
    */
   public function validate(array &$data): int
   {
-    $count = Abc::$DL->abcLoginHandlerCoreWrongPasswordByUsrIdCount(Abc::$companyResolver->getCmpId(),
+    $count = Nub::$DL->abcLoginHandlerCoreWrongPasswordByUsrIdCount(Nub::$companyResolver->getCmpId(),
                                                                     $data['usr_id'],
                                                                     $this->lgrIdWrongPassword,
                                                                     $this->interval);

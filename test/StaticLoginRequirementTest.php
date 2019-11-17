@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Login\Test;
+namespace Plaisio\Login\Test;
 
 use PHPUnit\Framework\TestCase;
-use SetBased\Abc\C;
-use SetBased\Abc\Login\StaticLoginRequirement;
+use Plaisio\C;
+use Plaisio\Login\StaticLoginRequirement;
 
 /**
  * Test cases for class StaticLoginRequirement.

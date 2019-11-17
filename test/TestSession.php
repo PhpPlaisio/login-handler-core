@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Login\Test;
+namespace Plaisio\Login\Test;
 
-use SetBased\Abc\Session\Session;
+use Plaisio\Session\Session;
 
 /**
  * Mock framework for testing purposes.
@@ -24,7 +24,7 @@ class TestSession implements Session
    *
    * @return int
    *
-   * @deprecated Use Abc::$companyResolver->getCmpId() instead.
+   * @deprecated Use Nub::$companyResolver->getCmpId() instead.
    */
   public function getCmpId(): int
   {

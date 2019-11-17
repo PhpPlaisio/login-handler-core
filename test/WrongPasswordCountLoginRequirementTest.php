@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Login\Test;
+namespace Plaisio\Login\Test;
 
 use PHPUnit\Framework\TestCase;
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Login\StaticLoginRequirement;
-use SetBased\Abc\Login\WrongPasswordCountLoginRequirement;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
+use Plaisio\Login\StaticLoginRequirement;
+use Plaisio\Login\WrongPasswordCountLoginRequirement;
 
 /**
  * Test cases for class WrongPasswordCountLoginRequirement.
@@ -18,9 +18,9 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   /**
    * Our concrete instance of Abc.
    *
-   * @var Abc
+   * @var Nub
    */
-  private static $abc;
+  private static $nub;
 
   //--------------------------------------------------------------------------------------------------------------------
 
@@ -80,10 +80,10 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
    */
   protected function setUp(): void
   {
-    self::$abc = new TestAbc();
+    self::$nub = new TestNub();
 
-    Abc::$DL->connect('localhost', 'test', 'test', 'test');
-    Abc::$DL->begin();
+    Nub::$DL->connect('localhost', 'test', 'test', 'test');
+    Nub::$DL->begin();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -92,8 +92,8 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
    */
   protected function tearDown(): void
   {
-    Abc::$DL->commit();
-    Abc::$DL->disconnect();
+    Nub::$DL->commit();
+    Nub::$DL->disconnect();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

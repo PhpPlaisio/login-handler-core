@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Login\Test;
+namespace Plaisio\Login\Test;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\Request\CoreRequest;
+use Plaisio\Kernel\Nub;
+use Plaisio\Request\CoreRequest;
 
 /**
  * Mock framework for testing purposes.
  */
-class TestAbc extends Abc
+class TestNub extends Nub
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
