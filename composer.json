@@ -10,14 +10,14 @@
   "license": "MIT",
   "require": {
     "php": ">=7.3",
-    "plaisio/kernel": "^1.0",
-    "plaisio/login-handler": "^1.0",
-    "plaisio/login-requirement": "^1.0"
+    "plaisio/kernel": "^1.1",
+    "plaisio/login-handler": "^1.1",
+    "plaisio/login-requirement": "^1.1"
   },
   "require-dev": {
     "phing/phing": "^2.0",
     "phpunit/phpunit": "^9.0",
-    "plaisio/request-core": "^0.10.0",
+    "plaisio/request-core": "^0.10.1",
     "setbased/php-stratum": "^5.4",
     "setbased/php-stratum-mysql": "^4.4"
 
