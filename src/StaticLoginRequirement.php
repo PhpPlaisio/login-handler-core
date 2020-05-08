@@ -17,7 +17,6 @@ class StaticLoginRequirement implements LoginRequirement
   private $lgrId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *

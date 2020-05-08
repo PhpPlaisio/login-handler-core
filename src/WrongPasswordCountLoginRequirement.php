@@ -41,7 +41,6 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
   private $maxFailedAttempts;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * WrongPasswordCountLoginRequirement constructor.
    *
@@ -77,10 +76,10 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
    */
   public function validate(array &$data): int
   {
-    $count = Nub::$DL->abcLoginHandlerCoreWrongPasswordByUsrIdCount(Nub::$companyResolver->getCmpId(),
-                                                                    $data['usr_id'],
-                                                                    $this->lgrIdWrongPassword,
-                                                                    $this->interval);
+    $count = Nub::$nub->DL->abcLoginHandlerCoreWrongPasswordByUsrIdCount(Nub::$nub->companyResolver->getCmpId(),
+                                                                         $data['usr_id'],
+                                                                         $this->lgrIdWrongPassword,
+                                                                         $this->interval);
 
     return ($count<=$this->maxFailedAttempts) ? C::LGR_ID_GRANTED : $this->lgrIdToManyWrongPassword;
   }

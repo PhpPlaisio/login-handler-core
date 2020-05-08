@@ -20,6 +20,24 @@ class TestSession implements Session
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * @inheritDoc
+   */
+  public static function destroyAllSessionsOfUser(int $usrId): void
+  {
+    throw new \LogicException('Not implemented');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritDoc
+   */
+  public function destroyOtherSessionsOfUser(): void
+  {
+    throw new \LogicException('Not implemented');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the ID of company of the current session.
    *
    * @return int
@@ -58,12 +76,13 @@ class TestSession implements Session
    * Returns a reference to the data of a named section of the session.
    *
    * If the named section does not yet exists a reference to null is returned. Only named sections opened in shared
-   * and exclusive mode will be saved by @see save.
+   * and exclusive mode will be saved by @param string $name The name of the named section.
    *
-   * @param string $name The name of the named section.
-   * @param int    $mode The mode for getting the named section.
+   * @param int $mode The mode for getting the named section.
    *
    * @return mixed
+   *
+   * @see   save.
    *
    * @since 1.0.0
    * @api

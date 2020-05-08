@@ -23,7 +23,6 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   private static $nub;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Test for method validate with successful login.
    */
@@ -80,10 +79,10 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
    */
   protected function setUp(): void
   {
-    self::$nub = new TestNub();
+    self::$nub = new TestKernel();
 
-    Nub::$DL->connect('localhost', 'test', 'test', 'test');
-    Nub::$DL->begin();
+    Nub::$nub->DL->connect('localhost', 'test', 'test', 'test');
+    Nub::$nub->DL->begin();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -92,8 +91,8 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
    */
   protected function tearDown(): void
   {
-    Nub::$DL->commit();
-    Nub::$DL->disconnect();
+    Nub::$nub->DL->commit();
+    Nub::$nub->DL->disconnect();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

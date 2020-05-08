@@ -43,7 +43,6 @@ abstract class CoreLoginHandler implements LoginHandler
   protected $requirements = [];
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Sets the (initial) data for validating the login request.
    *
@@ -122,12 +121,12 @@ abstract class CoreLoginHandler implements LoginHandler
    */
   private function logLoginAttempt(): void
   {
-    Nub::$DL->abcLoginHandlerCoreLogLogin(Nub::$companyResolver->getCmpId(),
-                                          Nub::$session->getSesId(),
-                                          $this->data['usr_id'] ?? null,
-                                          $this->lgrId,
-                                          $this->data['usr_name'] ?? null,
-                                          Nub::$request->getRemoteIp());
+    Nub::$nub->DL->abcLoginHandlerCoreLogLogin(Nub::$nub->companyResolver->getCmpId(),
+                                               Nub::$nub->session->getSesId(),
+                                               $this->data['usr_id'] ?? null,
+                                               $this->lgrId,
+                                               $this->data['usr_name'] ?? null,
+                                               Nub::$nub->request->getRemoteIp());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -138,7 +137,7 @@ abstract class CoreLoginHandler implements LoginHandler
   {
     if ($this->lgrId==C::LGR_ID_GRANTED)
     {
-      Nub::$session->login($this->data['usr_id']);
+      Nub::$nub->session->login($this->data['usr_id']);
     }
   }
 
