@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Plaisio\Login;
 
 use Plaisio\C;
-use Plaisio\Kernel\Nub;
+use Plaisio\PlaisioObject;
 
 /**
  * The core login handler using a list of login requirements.
  */
-abstract class CoreLoginHandler implements LoginHandler
+abstract class CoreLoginHandler extends PlaisioObject implements LoginHandler
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -121,12 +121,12 @@ abstract class CoreLoginHandler implements LoginHandler
    */
   private function logLoginAttempt(): void
   {
-    Nub::$nub->DL->abcLoginHandlerCoreLogLogin(Nub::$nub->companyResolver->getCmpId(),
-                                               Nub::$nub->session->getSesId(),
-                                               $this->data['usr_id'] ?? null,
-                                               $this->lgrId,
-                                               $this->data['usr_name'] ?? null,
-                                               Nub::$nub->request->getRemoteIp());
+    $this->nub->DL->abcLoginHandlerCoreLogLogin($this->nub->company->cmpId,
+                                                $this->nub->session->sesId,
+                                                $this->data['usr_id'] ?? null,
+                                                $this->lgrId,
+                                                $this->data['usr_name'] ?? null,
+                                                $this->nub->request->getRemoteIp());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -137,7 +137,7 @@ abstract class CoreLoginHandler implements LoginHandler
   {
     if ($this->lgrId==C::LGR_ID_GRANTED)
     {
-      Nub::$nub->session->login($this->data['usr_id']);
+      $this->nub->session->login($this->data['usr_id']);
     }
   }
 

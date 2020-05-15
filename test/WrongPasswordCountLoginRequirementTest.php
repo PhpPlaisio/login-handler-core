@@ -5,9 +5,9 @@ namespace Plaisio\Login\Test;
 
 use PHPUnit\Framework\TestCase;
 use Plaisio\C;
-use Plaisio\Kernel\Nub;
 use Plaisio\Login\StaticLoginRequirement;
 use Plaisio\Login\WrongPasswordCountLoginRequirement;
+use Plaisio\PlaisioKernel;
 
 /**
  * Test cases for class WrongPasswordCountLoginRequirement.
@@ -18,27 +18,29 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   /**
    * Our concrete instance of Abc.
    *
-   * @var Nub
+   * @var PlaisioKernel
    */
-  private static $nub;
+  private $kernel;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Test for method validate with successful login.
    */
   public function testValidate1(): void
   {
     $requirements   = [];
-    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_WRONG_PASSWORD,
+    $requirements[] = new WrongPasswordCountLoginRequirement($this->kernel,
+                                                             C::LGR_ID_WRONG_PASSWORD,
                                                              C::LGR_ID_TO_MANY_WRONG_PASSWORD,
                                                              3,
                                                              60);
 
-    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
+    $handler = new TestCoreLoginHandler($this->kernel, $requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
     $granted = $handler->validate();
 
     self::assertTrue($granted);
-    self::assertSame(3, TestSession::$usrId);
+    self::assertSame(3, $this->kernel->session->usrId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -49,12 +51,13 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   {
     $requirements   = [];
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_WRONG_PASSWORD);
-    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_WRONG_PASSWORD,
+    $requirements[] = new WrongPasswordCountLoginRequirement($this->kernel,
+                                                             C::LGR_ID_WRONG_PASSWORD,
                                                              C::LGR_ID_TO_MANY_WRONG_PASSWORD,
                                                              3,
                                                              60);
 
-    $handler = new TestCoreLoginHandler($requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
+    $handler = new TestCoreLoginHandler($this->kernel, $requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
     $handler->validate();
     $handler->validate();
     $handler->validate();
@@ -62,15 +65,16 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
 
     $requirements   = [];
     $requirements[] = new StaticLoginRequirement(C::LGR_ID_GRANTED);
-    $requirements[] = new WrongPasswordCountLoginRequirement(C::LGR_ID_WRONG_PASSWORD,
+    $requirements[] = new WrongPasswordCountLoginRequirement($this->kernel,
+                                                             C::LGR_ID_WRONG_PASSWORD,
                                                              C::LGR_ID_TO_MANY_WRONG_PASSWORD,
                                                              3,
                                                              60);
-    $handler        = new TestCoreLoginHandler($requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
+    $handler        = new TestCoreLoginHandler($this->kernel, $requirements, ['usr_id' => 3, 'usr_name' => 'abc']);
     $granted        = $handler->validate();
 
     self::assertFalse($granted);
-    self::assertNull(TestSession::$usrId);
+    self::assertNull($this->kernel->session->usrId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -79,10 +83,9 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
    */
   protected function setUp(): void
   {
-    self::$nub = new TestKernel();
-
-    Nub::$nub->DL->connect('localhost', 'test', 'test', 'test');
-    Nub::$nub->DL->begin();
+    $this->kernel = new TestKernel();
+    $this->kernel->DL->connect();
+    $this->kernel->DL->begin();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -91,8 +94,8 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
    */
   protected function tearDown(): void
   {
-    Nub::$nub->DL->commit();
-    Nub::$nub->DL->disconnect();
+    $this->kernel->DL->commit();
+    $this->kernel->DL->disconnect();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

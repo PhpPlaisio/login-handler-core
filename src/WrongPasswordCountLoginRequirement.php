@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Plaisio\Login;
 
 use Plaisio\C;
-use Plaisio\Kernel\Nub;
+use Plaisio\PlaisioObject;
 
 /**
  * Login requirement: Maximum number of failed login attempts cause by a wrong password.
  */
-class WrongPasswordCountLoginRequirement implements LoginRequirement
+class WrongPasswordCountLoginRequirement extends PlaisioObject implements LoginRequirement
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -44,19 +44,23 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
   /**
    * WrongPasswordCountLoginRequirement constructor.
    *
-   * @param int $lgrIdWrongPassword       The ID of the login response for a wrong password.
-   * @param int $lgrIdToManyWrongPassword The ID of the login response for to many wrong passwords.
-   * @param int $maxFailedAttempts        The maximum number of allowed failed login attempts due to a wrong password.
-   * @param int $minutes                  The length of the interval in minutes.
+   * @param PlaisioObject $object                   The parent PhpPlaisio object.
+   * @param int           $lgrIdWrongPassword       The ID of the login response for a wrong password.
+   * @param int           $lgrIdToManyWrongPassword The ID of the login response for to many wrong passwords.
+   * @param int           $maxFailedAttempts        The maximum number of allowed failed login attempts due to a wrong password.
+   * @param int           $minutes                  The length of the interval in minutes.
    *
    * @since 1.0.0
    * @api
    */
-  public function __construct(int $lgrIdWrongPassword,
+  public function __construct(PlaisioObject $object,
+                              int $lgrIdWrongPassword,
                               int $lgrIdToManyWrongPassword,
                               int $maxFailedAttempts,
                               int $minutes)
   {
+    parent::__construct($object);
+
     $this->lgrIdWrongPassword       = $lgrIdWrongPassword;
     $this->lgrIdToManyWrongPassword = $lgrIdToManyWrongPassword;
     $this->maxFailedAttempts        = $maxFailedAttempts;
@@ -76,10 +80,10 @@ class WrongPasswordCountLoginRequirement implements LoginRequirement
    */
   public function validate(array &$data): int
   {
-    $count = Nub::$nub->DL->abcLoginHandlerCoreWrongPasswordByUsrIdCount(Nub::$nub->companyResolver->getCmpId(),
-                                                                         $data['usr_id'],
-                                                                         $this->lgrIdWrongPassword,
-                                                                         $this->interval);
+    $count = $this->nub->DL->abcLoginHandlerCoreWrongPasswordByUsrIdCount($this->nub->company->cmpId,
+                                                                          $data['usr_id'],
+                                                                          $this->lgrIdWrongPassword,
+                                                                          $this->interval);
 
     return ($count<=$this->maxFailedAttempts) ? C::LGR_ID_GRANTED : $this->lgrIdToManyWrongPassword;
   }

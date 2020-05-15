@@ -13,14 +13,9 @@ class TestCompanyResolver implements CompanyResolver
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the ID of the company (a.k.a. domain).
-   *
-   * @return int
+   * @var int
    */
-  public function getCmpId(): int
-  {
-    return C::CMP_ID_SYS;
-  }
+  public $cmpId = C::CMP_ID_SYS;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

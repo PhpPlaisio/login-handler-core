@@ -12,17 +12,31 @@ class TestSession implements Session
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The ID of the profile of the user of the current session.
+   *
+   * @var int
+   */
+  public $proId;
+
+  /**
+   * The ID of the current session.
+   *
+   * @var int
+   */
+  public $sesId;
+
+  /**
    * The ID of the logged in user.
    *
    * @var int
    */
-  public static $usrId;
+  public $usrId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritDoc
    */
-  public static function destroyAllSessionsOfUser(int $usrId): void
+  public function destroyAllSessions(): void
   {
     throw new \LogicException('Not implemented');
   }
@@ -31,20 +45,16 @@ class TestSession implements Session
   /**
    * @inheritDoc
    */
-  public function destroyOtherSessionsOfUser(): void
+  public function destroyAllSessionsOfUser(int $usrId): void
   {
     throw new \LogicException('Not implemented');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the ID of company of the current session.
-   *
-   * @return int
-   *
-   * @deprecated Use Nub::$companyResolver->getCmpId() instead.
+   * @inheritDoc
    */
-  public function getCmpId(): int
+  public function destroyOtherSessions(): void
   {
     throw new \LogicException('Not implemented');
   }
@@ -94,44 +104,11 @@ class TestSession implements Session
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the ID of the profile of the user of the current session.
-   *
-   * @return int
-   */
-  public function getProId(): int
-  {
-    throw new \LogicException('Not implemented');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the ID of the current session.
-   *
-   * @return int|null
-   */
-  public function getSesId(): ?int
-  {
-    return null;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the session token.
    *
    * @return string
    */
   public function getSessionToken(): string
-  {
-    throw new \LogicException('Not implemented');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the ID of the user of the current session.
-   *
-   * @return int
-   */
-  public function getUsrId(): int
   {
     throw new \LogicException('Not implemented');
   }
@@ -157,7 +134,7 @@ class TestSession implements Session
    */
   public function login(int $usrId): void
   {
-    self::$usrId = $usrId;
+    $this->usrId = $usrId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

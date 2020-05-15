@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Login\Test;
 
 use Plaisio\CompanyResolver\CompanyResolver;
-use Plaisio\Kernel\Nub;
+use Plaisio\PlaisioKernel;
 use Plaisio\Request\CoreRequest;
 use Plaisio\Request\Request;
 use Plaisio\Session\Session;
@@ -13,24 +13,15 @@ use SetBased\Stratum\MySql\MySqlDefaultConnector;
 /**
  * Kernel for testing purposes.
  */
-class TestKernel extends Nub
+class TestKernel extends PlaisioKernel
 {
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Object constructor.
-   */
-  public function __construct()
-  {
-    parent::__construct();
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the helper object for deriving the company.
    *
    * @return CompanyResolver
    */
-  protected function getCompanyResolver(): CompanyResolver
+  protected function getCompany(): CompanyResolver
   {
     return new TestCompanyResolver();
   }
@@ -70,10 +61,7 @@ class TestKernel extends Nub
    */
   protected function getSession(): Session
   {
-    $session            = new TestSession();
-    TestSession::$usrId = null;
-
-    return $session;
+    return new TestSession();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

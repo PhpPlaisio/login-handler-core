@@ -1,0 +1,12 @@
+<database>
+    <provides>
+        <table>ABC_AUTH_LOGIN_LOG</table>
+        <table>ABC_AUTH_LOGIN_RESPONSE</table>
+    </provides>
+    <requires>
+        <table>ABC_BABEL_WORD</table>
+    </requires>
+    <scripts>
+        <script>lib/ddl/0100_create_tables.sql</script>
+    </scripts>
+</database>
