@@ -13,7 +13,7 @@
     "plaisio/kernel": "^3.0",
     "plaisio/login-handler": "^1.2",
     "plaisio/login-requirement": "^1.1",
-    "plaisio/session": "^3.0"
+    "plaisio/session": "^4.0"
   },
   "require-dev": {
     "phing/phing": "^2.0",
