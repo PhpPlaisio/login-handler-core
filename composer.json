@@ -21,7 +21,7 @@
     "plaisio/console": "^2.0",
     "plaisio/request-core": "^0.10.2",
     "setbased/php-stratum": "^6.0",
-    "setbased/php-stratum-mysql": "^5.0"
+    "setbased/php-stratum-mysql": "^6.0"
   },
   "autoload": {
     "psr-4": {
