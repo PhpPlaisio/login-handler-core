@@ -18,28 +18,28 @@ class WrongPasswordCountLoginRequirement extends PlaisioObject implements LoginR
    *
    * @var int
    */
-  private $interval;
+  private int $interval;
 
   /**
    * The ID of the login response for to many wrong passwords.
    *
    * @var int
    */
-  private $lgrIdToManyWrongPassword;
+  private int $lgrIdToManyWrongPassword;
 
   /**
    * The ID of the login response for a wrong password.
    *
    * @var int
    */
-  private $lgrIdWrongPassword;
+  private int $lgrIdWrongPassword;
 
   /**
    * The maximum number of allowed failed login attempts due to a wrong password.
    *
    * @var int
    */
-  private $maxFailedAttempts;
+  private int $maxFailedAttempts;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

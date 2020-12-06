@@ -1,14 +1,31 @@
+filter:
+  dependency_paths:
+    - "vendor/"
+  excluded_paths:
+    - 'test/'
+
 build:
   environment:
     mysql: 5.7
+    php:
+      pecl_extensions:
+        - inotify
 
-  tests:
-    before:
-      - export PLAISIO_CONFIG_DIR=test
-      - ./bin/phing kernel
-    override:
-      - command: './bin/phing unit'
-        coverage:
-          file:   'test/coverage.xml'
-          format: 'php-clover'
+    project_setup:
+      before:
+        - export PLAISIO_CONFIG_DIR=test
+        - ./bin/phing kernel
 
+  nodes:
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run
+
+    coverage:
+      tests:
+        override:
+          - command: './bin/phing unit'
+            coverage:
+              file:   'test/coverage.xml'
+              format: 'php-clover'

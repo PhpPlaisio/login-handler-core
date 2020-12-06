@@ -20,17 +20,17 @@ abstract class CoreLoginHandler extends PlaisioObject implements LoginHandler
    * @since 1.0.0
    * @api
    */
-  protected $data = [];
+  protected array $data = [];
 
   /**
    * The ID of the login response.
    *
-   * @var int
+   * @var int|null
    *
    * @since 1.0.0
    * @api
    */
-  protected $lgrId;
+  protected ?int $lgrId = null;
 
   /**
    * The list of login requirements.
@@ -40,7 +40,7 @@ abstract class CoreLoginHandler extends PlaisioObject implements LoginHandler
    * @since 1.0.0
    * @api
    */
-  protected $requirements = [];
+  protected array $requirements = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -135,7 +135,7 @@ abstract class CoreLoginHandler extends PlaisioObject implements LoginHandler
    */
   private function login(): void
   {
-    if ($this->lgrId==C::LGR_ID_GRANTED)
+    if ($this->lgrId===C::LGR_ID_GRANTED)
     {
       $this->nub->session->login($this->data['usr_id']);
     }
@@ -159,7 +159,7 @@ abstract class CoreLoginHandler extends PlaisioObject implements LoginHandler
       $this->lgrId = $requirement->validate($this->data);
 
       if ($this->lgrId===null) return null;
-      if ($this->lgrId!=C::LGR_ID_GRANTED) return false;
+      if ($this->lgrId!==C::LGR_ID_GRANTED) return false;
     }
 
     return true;

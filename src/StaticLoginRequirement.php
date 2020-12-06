@@ -12,9 +12,9 @@ class StaticLoginRequirement implements LoginRequirement
   /**
    * The ID of the login response.
    *
-   * @var int
+   * @var int|null
    */
-  private $lgrId;
+  private ?int $lgrId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
