@@ -19,7 +19,7 @@ class CoreLoginHandlerTest extends TestCase
    *
    * @var PlaisioKernel
    */
-  private $kernel;
+  private PlaisioKernel $kernel;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

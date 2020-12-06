@@ -14,26 +14,25 @@ class TestSession implements Session
   /**
    * The ID of the profile of the user of the current session.
    *
-   * @var int
+   * @var int|null
    */
-  public $proId;
+  public ?int $proId = null;
 
   /**
    * The ID of the current session.
    *
-   * @var int
+   * @var int|null
    */
-  public $sesId;
+  public ?int $sesId = null;
 
   /**
    * The ID of the logged in user.
    *
-   * @var int
+   * @var int|null
    */
-  public $usrId;
+  public ?int $usrId = null;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * @inheritDoc
    */

@@ -15,7 +15,7 @@ class TestCompanyResolver implements CompanyResolver
   /**
    * @var int
    */
-  public $cmpId = C::CMP_ID_SYS;
+  public int $cmpId = C::CMP_ID_SYS;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

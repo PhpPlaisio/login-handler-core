@@ -20,7 +20,7 @@ class TestCoreLoginHandler extends CoreLoginHandler
    * @param LoginRequirement[] $requirements The list of login requirements.
    * @param array              $data         The data provided to the login requirements.
    */
-  public function __construct(PlaisioInterface $object, $requirements, $data)
+  public function __construct(PlaisioInterface $object, array $requirements, array $data)
   {
     parent::__construct($object);
 
