@@ -5,7 +5,7 @@
 /*  FileName : abc-login-handler-core.ecm                                         */
 /*  Platform : MySQL 5                                                            */
 /*  Version  :                                                                    */
-/*  Date     : dinsdag 28 november 2017                                           */
+/*  Date     : donderdag 29 april 2021                                            */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -26,13 +26,13 @@ CREATE TABLE `ABC_AUTH_LOGIN_LOG` (
   `usr_id` INTEGER UNSIGNED,
   `llg_timestamp` TIMESTAMP DEFAULT now() NOT NULL,
   `llg_user_name` VARCHAR(64),
-  `llg_ip4` INT UNSIGNED,
+  `llg_ip` BINARY(16),
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`llg_id`)
 );
 
 /*
-COMMENT ON COLUMN `ABC_AUTH_LOGIN_LOG`.`llg_ip4`
-The IPv4 of the user agent.
+COMMENT ON COLUMN `ABC_AUTH_LOGIN_LOG`.`llg_ip`
+The IP address of the user agent.
 */
 
 /*================================================================================*/

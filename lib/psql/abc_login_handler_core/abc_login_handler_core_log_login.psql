@@ -6,7 +6,7 @@
  * @param p_usr_id        The ID of the user.
  * @param p_lgr_id        The ID of the login response.
  * @param p_llg_user_name The user name under which the user agent want to login.
- * @param p_ip_address    The IP address of the user agent.
+ * @param p_llg_ip        The packed IP address of the user agent.
  *
  * @type none
  */
@@ -15,7 +15,7 @@ create procedure abc_login_handler_core_log_login(in p_cmp_id        @abc_auth_l
                                                   in p_usr_id        @abc_auth_login_log.usr_id%type@,
                                                   in p_lgr_id        @abc_auth_login_log.lgr_id%type@,
                                                   in p_llg_user_name @abc_auth_login_log.llg_user_name%type@,
-                                                  in p_ip_address    varchar(15) )
+                                                  in p_llg_ip        @abc_auth_login_log.llg_ip%type@ )
 modifies sql data
 begin
   -- Log the login attempt in the login specific log table.
@@ -25,13 +25,13 @@ begin
   ,                               usr_id
   ,                               llg_timestamp
   ,                               llg_user_name
-  ,                               llg_ip4 )
+  ,                               llg_ip )
   values( p_cmp_id
   ,       p_lgr_id
   ,       p_ses_id
   ,       p_usr_id
   ,       now()
   ,       p_llg_user_name
-  ,       inet_aton(p_ip_address) )
+  ,       p_llg_ip )
   ;
 end
