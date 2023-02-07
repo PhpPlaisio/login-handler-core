@@ -22,8 +22,8 @@
 <a href="https://packagist.org/packages/plaisio/login-handler-core"><img src="https://poser.pugx.org/plaisio/login-handler-core/v/stable" alt="Latest Stable Version"/></a>
 </td>
 <td>
-<a href="https://travis-ci.org/PhpPlaisio/login-handler-core"><img src="https://travis-ci.org/PhpPlaisio/login-handler-core.svg?branch=master" alt="Build Status"/></a><br/>
-<a href="https://scrutinizer-ci.com/g/PhpPlaisio/login-handler-core/?branch=master"><img src="https://scrutinizer-ci.com/g/PhpPlaisio/login-handler-core/badges/coverage.png?b=master" alt="Code Coverage"/></a>
+<a href="https://github.com/PhpPlaisio/login-handler-core/actions/workflows/unit.yml"><img src="https://github.com/PhpPlaisio/login-handler-core/actions/workflows/unit.yml/badge.svg" alt="Build Status"/></a><br/>
+<a href="https://codecov.io/gh/PhpPlaisio/login-handler-core"><img src="https://codecov.io/gh/PhpPlaisio/login-handler-core/branch/master/graph/badge.svg" alt="Code Coverage"/></a>
 </td>
 <td>
 <a href="https://scrutinizer-ci.com/g/PhpPlaisio/login-handler-core/?branch=master"><img src="https://scrutinizer-ci.com/g/PhpPlaisio/login-handler-core/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>
