@@ -90,7 +90,7 @@ class TestSession implements Session
   /**
    * @inheritDoc
    */
-  public function &getNamedSection(string $name, int $mode)
+  public function &getNamedSection(string $name, int $mode): mixed
   {
     throw new \LogicException('Not implemented');
   }
