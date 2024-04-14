@@ -5,7 +5,7 @@
  * @param p_ses_id        The ID of the session.
  * @param p_usr_id        The ID of the user.
  * @param p_lgr_id        The ID of the login response.
- * @param p_llg_user_name The user name under which the user agent want to log in.
+ * @param p_llg_user_name The username under which the user agent want to log in.
  * @param p_llg_ip        The packed IP address of the user agent.
  *
  * @type none
