@@ -10,28 +10,30 @@
  *
  * @type none
  */
-create procedure abc_login_handler_core_log_login(in p_cmp_id        @abc_auth_login_log.cmp_id%type@,
-                                                  in p_ses_id        @abc_auth_login_log.ses_id%type@,
-                                                  in p_usr_id        @abc_auth_login_log.usr_id%type@,
-                                                  in p_lgr_id        @abc_auth_login_log.lgr_id%type@,
-                                                  in p_llg_user_name @abc_auth_login_log.llg_user_name%type@,
-                                                  in p_llg_ip        @abc_auth_login_log.llg_ip%type@ )
-modifies sql data
+create procedure abc_login_handler_core_log_login
+(
+  in p_cmp_id        smallint(5) unsigned, --              type: ABC_AUTH_LOGIN_LOG.cmp_id
+  in p_ses_id        int(10) unsigned, --                  type: ABC_AUTH_LOGIN_LOG.ses_id
+  in p_usr_id        int(10) unsigned, --                  type: ABC_AUTH_LOGIN_LOG.usr_id
+  in p_lgr_id        tinyint(3) unsigned, --               type: ABC_AUTH_LOGIN_LOG.lgr_id
+  in p_llg_user_name varchar(64) character set utf8mb3, -- type: ABC_AUTH_LOGIN_LOG.llg_user_name
+  in p_llg_ip        binary(16) --                         type: ABC_AUTH_LOGIN_LOG.llg_ip
+)
+  modifies sql data
 begin
   -- Log the login attempt in the login specific log table.
   insert into ABC_AUTH_LOGIN_LOG( cmp_id
-  ,                               lgr_id
-  ,                               ses_id
-  ,                               usr_id
-  ,                               llg_timestamp
-  ,                               llg_user_name
-  ,                               llg_ip )
-  values( p_cmp_id
-  ,       p_lgr_id
-  ,       p_ses_id
-  ,       p_usr_id
-  ,       now()
-  ,       p_llg_user_name
-  ,       p_llg_ip )
-  ;
+                                , lgr_id
+                                , ses_id
+                                , usr_id
+                                , llg_timestamp
+                                , llg_user_name
+                                , llg_ip )
+  values ( p_cmp_id
+         , p_lgr_id
+         , p_ses_id
+         , p_usr_id
+         , now()
+         , p_llg_user_name
+         , p_llg_ip );
 end
