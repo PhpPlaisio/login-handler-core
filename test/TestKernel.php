@@ -32,7 +32,7 @@ class TestKernel extends PlaisioKernel
    *
    * @return Object
    */
-  protected function getDL(): Object
+  protected function getDL(): object
   {
     $connector = new MySqlDefaultConnector('127.0.0.1', 'test', 'test', 'test');
     $dl        = new TestDataLayer($connector);
@@ -50,7 +50,10 @@ class TestKernel extends PlaisioKernel
    */
   protected function getRequest(): Request
   {
-    return new CoreRequest();
+    $request = new CoreRequest();
+    $request->validate();
+
+    return $request;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -121,7 +121,7 @@ abstract class CoreLoginHandler extends PlaisioObject implements LoginHandler
    */
   private function logLoginAttempt(): void
   {
-    $ip = $this->nub->request->getRemoteIp();
+    $ip = $this->nub->request->remoteIp;
     if ($ip!==null)
     {
       if (!str_contains($ip, ':'))
