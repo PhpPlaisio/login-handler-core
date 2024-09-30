@@ -16,8 +16,6 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - "8.1"
-          - "8.2"
           - "8.3"
         mysql-version:
           - "mysql-5.7"
