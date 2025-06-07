@@ -23,7 +23,6 @@ class WrongPasswordCountLoginRequirementTest extends TestCase
   private PlaisioKernel $kernel;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Test for method validate with successful login.
    */

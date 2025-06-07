@@ -50,7 +50,7 @@ class TestKernel extends PlaisioKernel
    */
   protected function getRequest(): Request
   {
-    $request = new CoreRequest();
+    $request = new CoreRequest($_SERVER, $_COOKIE);
     $request->validate();
 
     return $request;

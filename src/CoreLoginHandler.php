@@ -68,13 +68,22 @@ abstract class CoreLoginHandler extends PlaisioObject implements LoginHandler
   public function validate(): ?bool
   {
     $continue = $this->preValidation();
-    if (!$continue) return null;
+    if (!$continue)
+    {
+      return null;
+    }
 
     $granted = $this->validateRequirements();
-    if ($granted===null) return null;
+    if ($granted===null)
+    {
+      return null;
+    }
 
     $continue = $this->postValidation($granted);
-    if (!$continue) return null;
+    if (!$continue)
+    {
+      return null;
+    }
 
     $this->login();
     $this->logLoginAttempt();
@@ -135,7 +144,6 @@ abstract class CoreLoginHandler extends PlaisioObject implements LoginHandler
       $packed = null;
     }
 
-
     $this->nub->DL->abcLoginHandlerCoreLogLogin($this->nub->company->cmpId,
                                                 $this->nub->session->sesId,
                                                 $this->data['usr_id'] ?? null,
@@ -173,8 +181,14 @@ abstract class CoreLoginHandler extends PlaisioObject implements LoginHandler
     {
       $this->lgrId = $requirement->validate($this->data);
 
-      if ($this->lgrId===null) return null;
-      if ($this->lgrId!==C::LGR_ID_GRANTED) return false;
+      if ($this->lgrId===null)
+      {
+        return null;
+      }
+      if ($this->lgrId!==C::LGR_ID_GRANTED)
+      {
+        return false;
+      }
     }
 
     return true;

@@ -56,10 +56,10 @@ class WrongPasswordCountLoginRequirement extends PlaisioObject implements LoginR
    * @api
    */
   public function __construct(PlaisioInterface $object,
-                              int $lgrIdWrongPassword,
-                              int $lgrIdToManyWrongPassword,
-                              int $maxFailedAttempts,
-                              int $minutes)
+                              int              $lgrIdWrongPassword,
+                              int              $lgrIdToManyWrongPassword,
+                              int              $maxFailedAttempts,
+                              int              $minutes)
   {
     parent::__construct($object);
 

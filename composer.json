@@ -13,13 +13,13 @@
     "plaisio/kernel": "^3.2.1",
     "plaisio/login-handler": "^1.3.0",
     "plaisio/login-requirement": "^1.2.0",
-    "plaisio/request": "^1.0.0",
+    "plaisio/request": "^1.0.1",
     "plaisio/session": "^5.0.0",
-    "setbased/php-stratum-mysql": "^7.0.1"
+    "setbased/php-stratum-mysql": "^7.1.0"
   },
   "require-dev": {
-    "phing/phing": "^3.0.0",
-    "phpunit/phpunit": "^10.5.35",
+    "phing/phing": "^3.0.1",
+    "phpunit/phpunit": "^11.5.22",
     "plaisio/console-kernel": "^1.0.1",
     "plaisio/request-core": "^1.0.0",
     "setbased/php-stratum": "^6.3.1"
