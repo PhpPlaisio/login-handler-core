@@ -6,6 +6,8 @@ namespace Plaisio\Login\Test;
 use PHPUnit\Framework\TestCase;
 use Plaisio\C;
 use Plaisio\Login\StaticLoginRequirement;
+use Plaisio\Login\Test\Plaisio\TestCoreLoginHandler;
+use Plaisio\Login\Test\Plaisio\TestKernel;
 use Plaisio\PlaisioKernel;
 
 /**
@@ -22,6 +24,7 @@ class CoreLoginHandlerTest extends TestCase
   private PlaisioKernel $kernel;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Test for method validate with successful login.
    */
@@ -96,7 +99,8 @@ class CoreLoginHandlerTest extends TestCase
    */
   protected function setUp(): void
   {
-    $this->kernel = new TestKernel();
+    $_SERVER['REQUEST_URI'] = '/';
+    $this->kernel           = new TestKernel();
     $this->kernel->DL->connect();
     $this->kernel->DL->begin();
   }

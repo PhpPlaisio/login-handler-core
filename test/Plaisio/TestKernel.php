@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Plaisio\Login\Test;
+namespace Plaisio\Login\Test\Plaisio;
 
 use Plaisio\CompanyResolver\CompanyResolver;
 use Plaisio\PlaisioKernel;
@@ -50,7 +50,7 @@ class TestKernel extends PlaisioKernel
    */
   protected function getRequest(): Request
   {
-    $request = new CoreRequest($_SERVER, $_COOKIE);
+    $request = new CoreRequest($_SERVER, $_GET, $_POST, $_COOKIE, new TestRequestParameterResolver());
     $request->validate();
 
     return $request;

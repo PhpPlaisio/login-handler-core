@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Plaisio\Login\Test;
+namespace Plaisio\Login\Test\Plaisio;
 
 use PHPUnit\Framework\TestCase;
 use Plaisio\C;

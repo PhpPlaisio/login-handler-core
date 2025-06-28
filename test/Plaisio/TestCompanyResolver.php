@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Plaisio\Login\Test;
+namespace Plaisio\Login\Test\Plaisio;
 
-use Plaisio\C;
 use Plaisio\CompanyResolver\CompanyResolver;
+use Plaisio\C;
 
 /**
  * Mock framework for testing purposes.

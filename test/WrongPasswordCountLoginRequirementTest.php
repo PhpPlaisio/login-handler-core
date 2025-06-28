@@ -6,6 +6,8 @@ namespace Plaisio\Login\Test;
 use PHPUnit\Framework\TestCase;
 use Plaisio\C;
 use Plaisio\Login\StaticLoginRequirement;
+use Plaisio\Login\Test\Plaisio\TestCoreLoginHandler;
+use Plaisio\Login\Test\Plaisio\TestKernel;
 use Plaisio\Login\WrongPasswordCountLoginRequirement;
 use Plaisio\PlaisioKernel;
 
